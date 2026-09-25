@@ -20,15 +20,6 @@ def embedding_list_to_array(embeddings_list):
     embeddings_list2 = np.array(embeddings_list)
 #     print(embeddings_list2.shape)
     return embeddings_list2.shape
-def generate_text_to_vectorembedding(list_texts):
-    textmodel=_textmodel()
-    embeddings_generator = textmodel.embed(list_texts)
-#     for doc, vector in zip(list_texts, embeddings_generator):
-#        print("Document:", doc)
-#        print(f"Vector of type: {type(vector)} with shape: {vector.shape}")
-    embeddings_list = list(embeddings_generator)
-    embedding_list_to_array(embeddings_list)
-    return embeddings_list
 
 def embed_text_textstring(text):
     textmodel=_textmodel()
@@ -53,25 +44,34 @@ def all_embeddings(all_lists):
     return embeddings
 
 
-
-def generate_image_to_vectorembedding(list_images):
-    imagemodel=_imagemodel()
-    embeddings_generator = imagemodel.embed(list_images)
-    embeddings_list = list(embeddings_generator)
-    embedding_list_to_array(embeddings_list)
-    return embeddings_list
-def query_text_embedding(query_text_list):
-    textmodel=_textmodel()
-    embeddings_query=textmodel.query_embed(query_text_list)
-    query_embeddings = list(embeddings_query)
-    embedding_list_to_array(query_embeddings)
-    return query_embeddings
-
-def query_image_embedding(query_image):
-    imagemodel=_imagemodel()
-    embeddings_query=imagemodel.query_embed(query_image)
-    query_embeddings = list(embeddings_query)
-    return query_embeddings
+# def generate_text_to_vectorembedding(list_texts):
+#     textmodel=_textmodel()
+#     embeddings_generator = textmodel.embed(list_texts)
+# #     for doc, vector in zip(list_texts, embeddings_generator):
+# #        print("Document:", doc)
+# #        print(f"Vector of type: {type(vector)} with shape: {vector.shape}")
+#     embeddings_list = list(embeddings_generator)
+#     embedding_list_to_array(embeddings_list)
+#     return embeddings_list
+#
+# def generate_image_to_vectorembedding(list_images):
+#     imagemodel=_imagemodel()
+#     embeddings_generator = imagemodel.embed(list_images)
+#     embeddings_list = list(embeddings_generator)
+#     embedding_list_to_array(embeddings_list)
+#     return embeddings_list
+# def query_text_embedding(query_text_list):
+#     textmodel=_textmodel()
+#     embeddings_query=textmodel.query_embed(query_text_list)
+#     query_embeddings = list(embeddings_query)
+#     embedding_list_to_array(query_embeddings)
+#     return query_embeddings
+#
+# def query_image_embedding(query_image):
+#     imagemodel=_imagemodel()
+#     embeddings_query=imagemodel.query_embed(query_image)
+#     query_embeddings = list(embeddings_query)
+#     return query_embeddings
 
 
 # if __name__=='__main__':
