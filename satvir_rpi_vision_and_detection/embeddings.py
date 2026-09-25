@@ -119,7 +119,10 @@ def compute_relevance_scores_using_cosine(query_embedding, text_embeddings, k):
 #         for document_index in sorted_indices[query_index]:
 #             print(f"text: {list_texts[document_index]}")
 #
-#     vector1=embed_text_textstring("hi i am satvir")
-#     vector2=embed_image_crop(np.zeros((32, 32, 3), dtype=np.uint8))
-#       vector2=embed_image("/home/satvir/build_ai_assistant_on_rpi/satvir_rpi_vision_and_detection/rubberduck_1.jpg")
-#       print(vector2)
+if __name__ == "__main__":
+    vector1 = embed_text_textstring("hi i am satvir")
+#     print(vector1)
+    print("hi")
+
+    vectr = embed_query_textstring("satvir")
+#     print(vectr)
