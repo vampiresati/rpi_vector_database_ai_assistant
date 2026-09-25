@@ -25,4 +25,9 @@ def transcribe(wav_path):
 if __name__=='__main__':
     result=transcribe("/home/satvir/this_is_mobile_phone.wav")
     print(result)
+    from voice_labels import norm_label,parse_label
+    result=norm_label(result)
+    print(result)
+    result=parse_label(result)
+    print(result)
 #     result="This is mobile phone."
