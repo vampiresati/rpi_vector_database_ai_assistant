@@ -34,7 +34,8 @@ def embed_text_textstring(text):
     return next(textmodel.embed([text])).tolist()
 
 def embed_query_textstring(text):
-    return next(_text_model().query_embed([text])).tolist()
+    textmodel=_textmodel()
+    return next(textmodel.query_embed([text])).tolist()
 
 def embed_image_crop_single(bgr):
     from PIL import Image
