@@ -24,7 +24,7 @@ def compute_relevance_scores_using_cosine(query_embedding, text_embeddings, k):
     sorted_indices = top_k[0]
     return top_k
 
-def print_top_k(query_embedding, embeddings, documents, k=5):
+def print_top_k(query_embedding, embeddings, k=5):
     scores = np.dot(embeddings, query_embedding)
     sorted_scores = np.argsort(scores)[::-1]
     return sorted_scores
