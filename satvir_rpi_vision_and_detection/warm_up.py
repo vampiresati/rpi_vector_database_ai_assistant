@@ -17,6 +17,6 @@ def warm_text():
 
 def warm_up(progress=lambda name: None):
     """Load the image encoder used by the camera loop."""
-    progress("CLIP vision encoder")
+    progress("vision encoder")
     import numpy as np
     embed_image_crop_single(np.zeros((32, 32, 3), dtype=np.uint8))
