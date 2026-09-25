@@ -23,5 +23,5 @@ def transcribe(wav_path):
 
 
 if __name__=='__main__':
-    result=transcribe("/home/satvir/PycharmProjects/langgraphlearningbysatvir/punjabi.mp3")
+    result=transcribe("/home/satvir/api_fast/test.wav")
     print(result)
