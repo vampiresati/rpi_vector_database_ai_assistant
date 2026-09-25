@@ -23,5 +23,6 @@ def transcribe(wav_path):
 
 
 if __name__=='__main__':
-    result=transcribe("/home/satvir/api_fast/test.wav")
+    result=transcribe("/home/satvir/this_is_mobile_phone.wav")
     print(result)
+#     result="This is mobile phone."
