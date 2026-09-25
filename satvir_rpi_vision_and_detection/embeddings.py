@@ -5,6 +5,7 @@ from pathlib import Path
 from functools import lru_cache
 from config import IMAGE_EMBEDDING_MODEL,TEXT_EMBEDDING_MODEL,ENCODER_THREADS
 CACHE_DIR = (os.environ.get("FASTEMBED_CACHE_PATH") or str(Path.home() / ".cache" / "fastembed"))
+from top_k_retrival import *
 
 @lru_cache(maxsize=1)
 def _textmodel():
@@ -46,6 +47,11 @@ def embed_image_crop_single(bgr):
 def embed_image_singleimage(image_src):
     imagemodel=_imagemodel()
     return next(imagemodel.embed([image_src])).tolist()
+def all_embeddings(all_lists):
+    embedding_model =_textmodel()
+    embeddings: list[np.ndarray] = list(embedding_model.passage_embed(all_lists))
+    return embeddings
+
 
 
 def generate_image_to_vectorembedding(list_images):
@@ -67,30 +73,7 @@ def query_image_embedding(query_image):
     query_embeddings = list(embeddings_query)
     return query_embeddings
 
-def compute_relevance_scores(query_embedding, text_embeddings, k):
-    query_embedding_arr=np.array(query_embedding)
-    text_embeddings_arr=np.array(text_embeddings)
-    text_embeddings_arrT=text_embeddings_arr.transpose(1,0)
-    scores=np.matmul(query_embedding_arr, text_embeddings_arrT)
-    sortingscores=np.argsort(scores, axis=1)
-    reverseing_sorting=sortingscores[:, ::-1]
-    top_k=reverseing_sorting[:, :k]
-    sorted_indices =top_k[0]
-    return sorted_indices
 
-def compute_relevance_scores_using_cosine(query_embedding, text_embeddings, k):
-    query_embedding_arr=np.array(query_embedding)
-    text_embeddings_arr=np.array(text_embeddings)
-    query_norm = np.linalg.norm(query_embedding_arr, axis=1, keepdims=True)
-    text_norm = np.linalg.norm(text_embeddings_arr, axis=1, keepdims=True)
-    query_normalized = query_embedding_arr / query_norm
-    text_normalized = text_embeddings_arr / text_norm
-    scores = np.matmul(query_normalized,text_normalized.T)
-    sortingscores = np.argsort(scores, axis=1)
-    reverseing_sorting = sortingscores[:, ::-1]
-    top_k = reverseing_sorting[:, :k]
-    sorted_indices = top_k[0]
-    return top_k
 # if __name__=='__main__':
 #     list_images=["/home/satvir/build_ai_assistant_on_rpi/satvir_rpi_vision_and_detection/rubberduck_1.jpg"]
 #     generate_image_to_vectorembedding(list_images)
@@ -119,10 +102,4 @@ def compute_relevance_scores_using_cosine(query_embedding, text_embeddings, k):
 #         for document_index in sorted_indices[query_index]:
 #             print(f"text: {list_texts[document_index]}")
 #
-if __name__ == "__main__":
-    vector1 = embed_text_textstring("hi i am satvir")
-#     print(vector1)
-    print("hi")
 
-    vectr = embed_query_textstring("satvir")
-#     print(vectr)
