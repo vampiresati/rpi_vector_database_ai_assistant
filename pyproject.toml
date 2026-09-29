@@ -4,4 +4,14 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "fastembed>=0.8.1",
+    "lap>=0.5.13",
+    "onnx-asr>=0.12.0",
+    "opencv-python>=5.0.0.93",
+    "path>=17.1.1",
+    "pathl>=0.1.1a2",
+    "qdrant-edge-py>=0.8.0",
+    "torch>=2.14.0",
+    "ultralytics>=8.4.163",
+]
