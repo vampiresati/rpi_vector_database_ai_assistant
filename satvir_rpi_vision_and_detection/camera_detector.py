@@ -147,7 +147,7 @@ class Detector:
         self.conf = conf
         self.max_area = max_area
         # Reuse weights stored at the repository root from any working directory.
-        repo_copy = Path(__file__).resolve().parents[2] / weights
+        repo_copy = Path(__file__).resolve().parent / weights
         if not Path(weights).exists() and repo_copy.exists():
             weights = str(repo_copy)
         self.model = YOLO(weights)

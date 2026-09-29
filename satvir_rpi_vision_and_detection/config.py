@@ -1,11 +1,26 @@
-IMAGE_EMBEDDING_MODEL="Qdrant/clip-ViT-B-32-vision"
-TEXT_EMBEDDING_MODEL="nomic-ai/nomic-embed-text-v1.5"
+import os
+from pathlib import Path
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
+ENV_FILE = Path(__file__).resolve().parent / ".env"
+if load_dotenv is not None:
+    load_dotenv(ENV_FILE, override=False)
+
+IMAGE_EMBEDDING_MODEL = "Qdrant/clip-ViT-B-32-vision"
+IMAGE_EMBEDDING_DIM = 512
+TEXT_EMBEDDING_MODEL = "nomic-ai/nomic-embed-text-v1.5"
+TEXT_EMBEDDING_DIM = 768
 ENCODER_THREADS = 2
-CACHE_DIR=""
+CACHE_DIR = (os.environ.get("FASTEMBED_CACHE_PATH")
+             or str(Path.home() / ".cache" / "fastembed"))
 WHISPER_MODEL = "whisper-base"
 ASR_THREADS = 4
 
-import os
+
 def _number(name, default, cast=float):
     """One calibration knob, with a legible error instead of a stack trace."""
     raw = os.environ.get(name, "").strip()
@@ -68,4 +83,3 @@ if FRAME_CROP[0] + FRAME_CROP[2] > 0.8 or FRAME_CROP[1] + FRAME_CROP[3] > 0.8:
         f"{FRAME_CROP}")
 
 MIC_DEVICE = _device("MIC_DEVICE")
-

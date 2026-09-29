@@ -3,8 +3,12 @@ import os
 import numpy as np
 from pathlib import Path
 from functools import lru_cache
-from config import IMAGE_EMBEDDING_MODEL,TEXT_EMBEDDING_MODEL,ENCODER_THREADS
-CACHE_DIR = (os.environ.get("FASTEMBED_CACHE_PATH") or str(Path.home() / ".cache" / "fastembed"))
+from config import (
+    CACHE_DIR,
+    ENCODER_THREADS,
+    IMAGE_EMBEDDING_MODEL,
+    TEXT_EMBEDDING_MODEL,
+)
 from top_k_retrival import *
 
 @lru_cache(maxsize=1)
@@ -102,4 +106,3 @@ def all_embeddings(all_lists):
 #         for document_index in sorted_indices[query_index]:
 #             print(f"text: {list_texts[document_index]}")
 #
-
